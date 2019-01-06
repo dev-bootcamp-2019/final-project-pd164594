@@ -82,6 +82,7 @@ class App extends Component {
 
 onSubmit(event) {
     event.preventDefault()
+     console.log('ifpsHash1', this.state.ipfsHash)
     ipfs.files.add(this.state.buffer, (error, result) => {
       if(error) {
         console.error(error)
@@ -91,6 +92,7 @@ onSubmit(event) {
         return this.setState({ ipfsHash: result[0].hash })
         console.log('ifpsHash', this.state.ipfsHash)
       })
+       console.log('ifpsHash1', this.state.ipfsHash)
     })
   }
 
@@ -106,12 +108,14 @@ onSubmit(event) {
             <div className="pure-u-1-1">
               <h1>Your Image</h1>
               <p>This image is stored on IPFS & The Ethereum Blockchain!</p>
-              <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt=""/>
-              <h2>Upload Image</h2>
-              <form onSubmit={this.onSubmit} >
+               <form onSubmit={this.onSubmit} >
                 <input type='file' onChange={this.captureFile} />
                 <input type='submit' />
               </form>
+              <br/><br/>
+              <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt=""/>
+              <p>{this.state.ipfsHash}</p>
+              <h2>Upload Image</h2>
             </div>
           </div>
         </main>
