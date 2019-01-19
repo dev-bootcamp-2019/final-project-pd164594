@@ -1,0 +1,29 @@
+h5{
+  text-align: left;
+}
+
+nav {
+	background-color: #f2f2f2;
+
+}
+
+a{
+	color: #77b0d1 !important;
+
+}
+
+.btn-small{
+	background-color: #C99700;
+}
+
+#ndLogo{
+	margin-top: 5px;
+	width: 125px;
+	height: 50px;
+}
+
+button{
+	background-color: #f2f2f2 !important;
+	color: #77b0d1 !important;
+}
+
