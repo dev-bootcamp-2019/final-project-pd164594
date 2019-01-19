@@ -1,8 +1,22 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.4.18;
 
-import "installed_contracts/zeppelin/contracts/ownership/Ownable.sol";
+contract Owned {
+    address owner;
 
-contract Registrar is Ownable {
+    function Owned() public {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        require (msg.sender == owner);
+        _;
+    }
+
+}
+
+
+contract Registrar is Owned {
+    
 
     struct Student {
         string grade;
@@ -17,7 +31,6 @@ contract Registrar is Ownable {
     
     address[] public studentAccts;
 
-
     event studentInfo(
         string grade,
         address studentAddr,
@@ -29,10 +42,10 @@ contract Registrar is Ownable {
 
  
     
-    function setStudent (address _address, string memory  _grade, string memory _fName, string memory  _lName, string memory  _email, string memory  _className ) onlyOwner public {
+    function setStudent (address _address, string _grade, string _fName, string _lName, string _email, string _className) onlyOwner public {
         
 
-       Student storage student = Students[_address];
+        var student = Students[_address];
         
         //Setting the variables of my Struct. 
         student.grade = _grade;
@@ -43,16 +56,14 @@ contract Registrar is Ownable {
         student.className = _className;
         
         studentAccts.push(_address) -1;
-
-    
     }
     
-    function getStudents () view public returns(address[] memory){
+    function getStudents () view public returns(address[]){
         return studentAccts;
     }
     
     // creating student function
-    function getStudent(address _address ) view public returns (string memory, address, string memory, string memory, string memory, string memory) {
+    function getStudent(address _address) view public returns (string, address, string, string, string, string){
         return (Students[_address].grade, Students[_address].studentAddr, Students[_address].fName, Students[_address].lName, Students[_address].email, Students[_address].className);
     }
     
