@@ -17,7 +17,9 @@ contract Owned {
 
 contract Registrar is Owned {
     
-
+    /**
+    State Variables
+     */
     struct Student {
         string grade;
         address studentAddr;
@@ -40,9 +42,17 @@ contract Registrar is Owned {
         string className
         );
 
- 
-    
-    function setStudent (address _address, string _grade, string _fName, string _lName, string _email, string _className) onlyOwner public {
+
+
+     /** @dev Adds a student to our Registry. 
+      * @param _address
+      * @param _grade
+      * @param _fName
+      * @param _lName
+      * @param _email
+      * @param _className
+      */
+    function setStudent (address _address, string memory _grade, string memory _fName, string memory _lName, string memory _email, string memory _className) onlyOwner public {
         
 
         var student = Students[_address];
@@ -58,12 +68,12 @@ contract Registrar is Owned {
         studentAccts.push(_address) -1;
     }
     
-    function getStudents () view public returns(address[]){
+    function getStudents () view public returns(address[] memory){
         return studentAccts;
     }
     
     // creating student function
-    function getStudent(address _address) view public returns (string, address, string, string, string, string){
+    function getStudent(address _address) view public returns (string memory, address, string memory, string memory, string memory, string memory){
         return (Students[_address].grade, Students[_address].studentAddr, Students[_address].fName, Students[_address].lName, Students[_address].email, Students[_address].className);
     }
     
