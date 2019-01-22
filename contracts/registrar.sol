@@ -1,21 +1,9 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.5.0;
 
-contract Owned {
-    address owner;
-
-    constructor() public {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner {
-        require (msg.sender == owner);
-        _;
-    }
-
-}
+import "../installed_contracts/zeppelin/contracts/ownership/Ownable.sol";
 
 
-contract Registrar is Owned {
+contract Registrar is Ownable {
     
     /**
     State Variables
