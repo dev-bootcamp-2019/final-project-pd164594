@@ -29,11 +29,17 @@ contract Registrar is Owned {
         string className;
     }
     
+    /**
+    Mapping the address of the student to the Student Struct. 
+     */
     mapping (address => Student) Students;
     
+    /**
+    Array of all the address in our registry. 
+    */
     address[] public studentAccts;
 
-    event studentInfo(
+    event studentInfoSet(
         string grade,
         address studentAddr,
         string fName,
@@ -55,9 +61,8 @@ contract Registrar is Owned {
     function setStudent (address _address, string memory _grade, string memory _fName, string memory _lName, string memory _email, string memory _className) onlyOwner public {
         
 
-        var student = Students[_address];
-        
-        //Setting the variables of my Struct. 
+        Student memory student = Students[_address];
+
         student.grade = _grade;
         student.studentAddr = _address;
         student.fName = _fName;
