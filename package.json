@@ -22,5 +22,10 @@
   "homepage": "https://github.com/pd164594/ETH_NotreDame_Registrar#readme",
   "devDependencies": {
     "lite-server": "^2.4.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "truffle-hdwallet-provider": "^1.0.2"
   }
 }

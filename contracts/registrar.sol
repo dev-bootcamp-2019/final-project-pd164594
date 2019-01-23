@@ -5,6 +5,7 @@ import "../installed_contracts/zeppelin/contracts/ownership/Ownable.sol";
 
 contract Registrar is Ownable {
     
+
     /**
     State Variables
      */
@@ -16,6 +17,15 @@ contract Registrar is Ownable {
         string email;
         string className;
     }
+    
+    bool private stopped = false;
+    address owner;
+
+    constructor() public {
+        owner = msg.sender;
+    }
+    
+
     
     /**
     Mapping the address of the student to the Student Struct. 
@@ -35,6 +45,14 @@ contract Registrar is Ownable {
         string email,
         string className
         );
+    
+    /**
+    Modifiers
+     */
+    modifier stopInEmergency {
+        require(stopped == false, "This function is currently stopped");
+        _;
+    }
 
 
 
@@ -46,7 +64,7 @@ contract Registrar is Ownable {
       * @param _email  The students email address 
       * @param _className  The name of the class 
       */
-    function setStudent (address _address, string memory _grade, string memory _fName, string memory _lName, string memory _email, string memory _className) onlyOwner public {
+    function setStudent (address _address, string memory _grade, string memory _fName, string memory _lName, string memory _email, string memory _className) onlyOwner stopInEmergency public {
         
 
         Student memory student = Students[_address];
@@ -59,6 +77,8 @@ contract Registrar is Ownable {
         student.className = _className;
         
         studentAccts.push(_address) -1;
+
+        emit studentInfoSet(_grade, _address, _fName, _lName, _email, _className);
     }
     
     /** @dev gets all the addresses that are in our  
@@ -89,4 +109,14 @@ contract Registrar is Ownable {
     function countStudents () view public returns (uint){
         return studentAccts.length; 
     }
+
+    function stopRegistry () public onlyOwner {
+        stopped = true;
+    }
+
+    function startRegistry() public onlyOwner{
+        stopped = false;
+    }
+
+
 }
