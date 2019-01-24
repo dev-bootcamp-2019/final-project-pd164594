@@ -67,7 +67,7 @@ contract Registrar is Ownable {
     function setStudent (address _address, string memory _grade, string memory _fName, string memory _lName, string memory _email, string memory _className) onlyOwner stopInEmergency public {
         
 
-        Student memory student = Students[_address];
+        Student storage student = Students[_address];
 
         student.grade = _grade;
         student.studentAddr = _address;
