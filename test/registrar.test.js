@@ -11,6 +11,7 @@ contract('Registrar', function(accounts) {
     const grade = "A"
     const email = "patrick.doyle126@gmail.com"
     const className = "Math"
+    const stopped = true
 
 
 
@@ -41,34 +42,22 @@ contract('Registrar', function(accounts) {
    
     })
 
-    it("it should pause the function of a contract.", async() => {
+    it("it should pause the function of a contract", async() => {
         const registrar = await Registrar.deployed()
-        const stopped = false
 
-        result =  await registrar.stopRegistry()
+        await registrar.stopRegistry()
 
-    
-
-        assert.equal(result, True, 'the state of the item should be "Shipped", which should be declared third in the State Enum')
+        result = await registrar.stopped.call()
+        assert.equal(result, true, 'Should change status to True')
     })
 
-    // it("should allow the buyer to mark the item as received", async() => {
-    //     const supplyChain = await SupplyChain.deployed()
+    it("should activate the funcations of the contract that are stopped", async() => {
+        const registrar = await Registrar.deployed()
 
-    //     var eventEmitted = false
+        await registrar.startRegistry()
 
-    //     var event = supplyChain.Received()
-    //     await event.watch((err, res) => {
-    //         sku = res.args.sku.toString(10)
-    //         eventEmitted = true
-    //     })
-
-    //     await supplyChain.receiveItem(sku, {from: bob})
-
-    //     const result = await supplyChain.fetchItem.call(sku)
-
-    //     assert.equal(eventEmitted, true, 'adding an item should emit a Shipped event')
-    //     assert.equal(result[3].toString(10), 3, 'the state of the item should be "Received", which should be declared fourth in the State Enum')
-    // })
+        result = await registrar.stopped.call()
+        assert.equal(result, false, 'Should change status to false')
+    })
 
 });

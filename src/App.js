@@ -29,7 +29,6 @@ var defaultAccount
           }
       });
 
-        console.log(web3.eth.defaultAccount)
         web3.eth.getAccounts(function(error, accounts){
           defaultAccount = accounts;
           console.log(web3.eth.defaultAccount)

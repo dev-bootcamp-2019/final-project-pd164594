@@ -18,7 +18,7 @@ contract Registrar is Ownable {
         string className;
     }
     
-    bool private stopped = false;
+    bool public stopped = false;
     address owner;
 
     constructor() public {
@@ -110,8 +110,9 @@ contract Registrar is Ownable {
         return studentAccts.length; 
     }
 
-    function stopRegistry () public onlyOwner {
+    function stopRegistry () public onlyOwner returns (bool){
         stopped = true;
+        return true;
     }
 
     function startRegistry() public onlyOwner{
