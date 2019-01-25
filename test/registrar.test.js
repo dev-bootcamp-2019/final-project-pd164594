@@ -14,7 +14,7 @@ contract('Registrar', function(accounts) {
     const stopped = true
 
 
-
+    //This test adds a student to the registry and retrieves its. To check that they were properly added. 
     it("should add a student to our registry", async() => {
         const registrar = await Registrar.deployed()
     
@@ -31,6 +31,7 @@ contract('Registrar', function(accounts) {
 
     })
 
+    // This test checks the number of students that are currently in our registry. 
     it("should return the number of students in our registry", async() => {
         const registrar = await Registrar.deployed()
     
@@ -42,8 +43,9 @@ contract('Registrar', function(accounts) {
    
     })
 
-    it("it should pause the function of a contract", async() => {
-        const registrar = await Registrar.deployed()
+    //Check that our curicut breaker stops functions on our contract. 
+    it("it should pause the function of a contract", async() => {00000000
+        const registrar = await Registrar.deployed()0
 
         await registrar.stopRegistry()
 
@@ -51,6 +53,7 @@ contract('Registrar', function(accounts) {
         assert.equal(result, true, 'Should change status to True')
     })
 
+    //check that we can reactivate functions in our contract. 
     it("should activate the funcations of the contract that are stopped", async() => {
         const registrar = await Registrar.deployed()
 
@@ -60,6 +63,7 @@ contract('Registrar', function(accounts) {
         assert.equal(result, false, 'Should change status to false')
     })
 
+    //Check that the owner of the contract is properly defined. 
     it("checking that the owner of the contract is properly set", async() => {
         const registrar = await Registrar.deployed()
         result = await registrar.owner.call()
