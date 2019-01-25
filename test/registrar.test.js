@@ -60,4 +60,10 @@ contract('Registrar', function(accounts) {
         assert.equal(result, false, 'Should change status to false')
     })
 
+    it("checking that the owner of the contract is properly set", async() => {
+        const registrar = await Registrar.deployed()
+        result = await registrar.owner.call()
+        assert.equal(result, owner, 'Should return the owners address of the contract')
+    })
+
 });
